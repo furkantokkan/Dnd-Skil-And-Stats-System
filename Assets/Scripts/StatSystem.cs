@@ -41,9 +41,9 @@ public class StatSystem : MonoBehaviour
             }
         }
 
-        int score = (modifiedValue.moddedValue - 10) / 2;
+        //int score = (modifiedValue.moddedValue - 10) / 2;
 
-        return score;
+        return modifiedValue.moddedValue;
     }
 
     public void TakeDamage(int damage)

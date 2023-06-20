@@ -34,9 +34,9 @@ public class CombatSimilator : MonoBehaviour
         {
             Debug.LogFormat("{0}'s turn", attacker.name);
 
-            if (HitChance())
+            if (HitChanceCalculator.Calculate(attacker, defender))
             {
-                CauseDamage();
+                EffectCalculator.ApplyEffect(attacker, defender);
             }
 
             lastAttacked = defender;
@@ -52,7 +52,7 @@ public class CombatSimilator : MonoBehaviour
     [ContextMenu("AddModifier")]
     void AddModifier()
     {
-       AddValueModifier mod = attacker.gameObject.AddComponent<AddValueModifier>();
+        AddValueModifier mod = attacker.gameObject.AddComponent<AddValueModifier>();
         mod.type = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(1);
     }
@@ -64,33 +64,32 @@ public class CombatSimilator : MonoBehaviour
         mod.typeToEffect = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(3);
     }
-    void CauseDamage()
-    {
-        int roll = Random.Range(1, 7);
-        int score = roll + attacker.GetAbilityScore(statToPrint);
+    //void CauseDamage()
+    //{
+    //    int roll = Random.Range(1, 7);
+    //    int score = roll + attacker.GetAbilityScore(statToPrint);
 
-        defender.TakeDamage(score);
+    //    defender.TakeDamage(score);
 
-        Debug.LogFormat("{0} suffered {1} damage", defender.name, score);
-    }
-    bool HitChance()
-    {
-        int roll = Random.Range(1, 21);
+    //    Debug.LogFormat("{0} suffered {1} damage", defender.name, score);
+    //}
+    //bool HitChance()
+    //{
+    //    int roll = Random.Range(1, 21);
 
-        float armorClass = defender.GetStat(StatEnum.ArmorClass).value;
-        float score = roll + attacker.GetAbilityScore(statToPrint);
+    //    float armorClass = defender.GetStat(StatEnum.ArmorClass).value;
+    //    float score = roll + attacker.GetAbilityScore(statToPrint);
 
-        Debug.LogFormat("Roll:{0} | Score:{1} | armorClass:{2}", roll, score, armorClass);
+    //    Debug.LogFormat("Roll:{0} | Score:{1} | armorClass:{2}", roll, score, armorClass);
 
-        if (score > armorClass)
-        {
-            Debug.Log("Hit");
-            return true;
-        }
-        else
-        {
-            Debug.Log("Miss");
-            return false;
-        }
-    }
+    //    if (score > armorClass)
+    //    {
+    //        Debug.Log("Hit");
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Miss");
+    //        return false;
+    //    }
 }

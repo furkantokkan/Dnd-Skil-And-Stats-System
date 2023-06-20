@@ -284,27 +284,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-  - value: 8
+  - value: 15
     type: 0
-  - value: 8
+  - value: 15
     type: 1
-  - value: 13
+  - value: 14
     type: 2
-  - value: 13
+  - value: 14
     type: 3
-  - value: 13
+  - value: 19
     type: 4
-  - value: 10
+  - value: 15
     type: 5
-  - value: 12
+  - value: 8
     type: 6
   - value: 16
     type: 7
-  - value: 13
+  - value: 7
     type: 8
-  - value: 1
+  - value: 3
     type: 9
-  - value: 1
+  - value: 12
     type: 10
 --- !u!4 &1080111255
 Transform:
@@ -351,27 +351,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-  - value: 16
+  - value: 13
     type: 0
-  - value: 16
+  - value: 13
     type: 1
-  - value: 7
+  - value: 12
     type: 2
-  - value: 7
+  - value: 12
     type: 3
-  - value: 19
+  - value: 15
     type: 4
-  - value: 17
+  - value: 15
     type: 5
   - value: 1
     type: 6
-  - value: 13
+  - value: 16
     type: 7
-  - value: 14
+  - value: 17
     type: 8
-  - value: 3
+  - value: 5
     type: 9
-  - value: 7
+  - value: 15
     type: 10
 --- !u!4 &1224341544
 Transform:

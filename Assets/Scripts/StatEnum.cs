@@ -13,6 +13,5 @@ public enum StatEnum
     Constitution,
     Agility,
     Intelligence,
-    Wisdom,
-    ArmorClass
+    Wisdom
 }
