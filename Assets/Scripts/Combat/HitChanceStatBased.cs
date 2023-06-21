@@ -8,8 +8,8 @@ public class HitChanceStatBased : HitChanceCalculator
 
     public override bool Calculate(StatSystem attacker, StatSystem defender)
     {
-        float attackerScore = attacker.GetAbilityScore(StatEnum.Dexterity);
-        float defenderScore = defender.GetAbilityScore(StatEnum.Agility);
+        float attackerScore = attacker.GetAbilityScore(attackerStat);
+        float defenderScore = defender.GetAbilityScore(defenderStat);
 
         float score = (attackerScore - defenderScore) * 2;
 

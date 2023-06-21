@@ -13,5 +13,6 @@ public enum StatEnum
     Constitution,
     Agility,
     Intelligence,
-    Wisdom
+    Wisdom,
+    None
 }

@@ -429,6 +429,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3315334002878197054, guid: f7a9b2c0b84f13c4eb4afa0aeef20b57, type: 3}
+      propertyPath: stats.Array.data[0].value
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315334002878197054, guid: f7a9b2c0b84f13c4eb4afa0aeef20b57, type: 3}
+      propertyPath: stats.Array.data[1].value
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 3315334002878197055, guid: f7a9b2c0b84f13c4eb4afa0aeef20b57, type: 3}
       propertyPath: m_Name
       value: Unit1
@@ -442,6 +450,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 462618666}
     m_Modifications:
+    - target: {fileID: 6091928769213344680, guid: 1664e4edb2a7b7544bb761aaccf53b7c, type: 3}
+      propertyPath: stats.Array.data[0].value
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091928769213344680, guid: 1664e4edb2a7b7544bb761aaccf53b7c, type: 3}
+      propertyPath: stats.Array.data[1].value
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 6091928769213344681, guid: 1664e4edb2a7b7544bb761aaccf53b7c, type: 3}
       propertyPath: m_RootOrder
       value: 0

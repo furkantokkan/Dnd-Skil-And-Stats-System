@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class StatSystem : MonoBehaviour
 {
-    public Stat[] stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length];
+    public Stat[] stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length - 1];
     [ContextMenu("SetStats")]
     void SetStats()
     {
-        stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length];
+        stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length - 1];
         for (int i = 0; i < stats.Length; i++)
         {
             stats[i] = new Stat();

@@ -34,7 +34,7 @@ public class CombatSimilator : MonoBehaviour
         {
             Debug.LogFormat("{0}'s turn", attacker.name);
 
-            Skill skill = attacker.GetComponentInChildren<Skill>();
+            Skill skill = GetRandomSkill();
             skill.Use(skill.GetComponent<Targets>().GetTarget());
 
             lastAttacked = defender;
@@ -61,6 +61,12 @@ public class CombatSimilator : MonoBehaviour
         mod.type = statToPrint;
         mod.typeToEffect = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(3);
+    }
+    Skill GetRandomSkill()
+    {
+        Skill[] skills = attacker.GetComponentsInChildren<Skill>();
+        int index = Random.Range(0, skills.Length);
+        return skills[index];
     }
     //void CauseDamage()
     //{

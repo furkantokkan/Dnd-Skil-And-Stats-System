@@ -9,13 +9,17 @@ public class HealEffect : EffectCalculator
 
     public override void ApplyEffect(StatSystem attacker, StatSystem defender)
     {
-        float attackerScore = attacker.GetAbilityScore(StatEnum.Strength);
+        float attackerScore = CalculateScore(attacker, attackStats);
 
         float roll = 1 + Random.Range(-variance, variance);
 
         float finalScore = (attackerScore * roll) * power;
 
         defender.ChangeHP(Mathf.CeilToInt(finalScore));
-        Debug.LogFormat("{0} suffered {1} damage", defender.name, Mathf.CeilToInt(finalScore));
+        Debug.LogFormat("{0} healed {1} amount", defender.name, Mathf.CeilToInt(finalScore));
+    }
+    protected override int CalculateScore(StatSystem unit, List<StatsEffect> stats)
+    {
+        return base.CalculateScore(unit, stats);
     }
 }
