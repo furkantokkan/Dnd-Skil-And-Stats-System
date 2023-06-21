@@ -34,10 +34,7 @@ public class CombatSimilator : MonoBehaviour
         {
             Debug.LogFormat("{0}'s turn", attacker.name);
 
-            if (HitChanceCalculator.Calculate(attacker, defender))
-            {
-                EffectCalculator.ApplyEffect(attacker, defender);
-            }
+            GetComponentInChildren<Skill>().Use(defender);
 
             lastAttacked = defender;
             defender = attacker;

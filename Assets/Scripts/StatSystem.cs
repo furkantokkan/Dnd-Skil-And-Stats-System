@@ -9,8 +9,10 @@ public class StatSystem : MonoBehaviour
     [ContextMenu("SetStats")]
     void SetStats()
     {
+        stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length];
         for (int i = 0; i < stats.Length; i++)
         {
+            stats[i] = new Stat();
             stats[i].type = (StatEnum)i;
         }
     }
@@ -46,11 +48,12 @@ public class StatSystem : MonoBehaviour
         return modifiedValue.moddedValue;
     }
 
-    public void TakeDamage(int damage)
+    public void ChangeHP(int amount)
     {
         Stat hp = GetStat(StatEnum.HP);
-        int clampedValue = Mathf.Clamp(damage, 0, hp.value);
-        hp.value -= clampedValue;
+        int tempValue = hp.value + amount;
+        int clampedValue = Mathf.Clamp(tempValue, 0, GetStat(StatEnum.MaxHP).value);
+        hp.value = clampedValue;
     }
 
     public Stat GetStat(StatEnum type)
