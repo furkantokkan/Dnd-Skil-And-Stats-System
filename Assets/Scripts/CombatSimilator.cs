@@ -34,7 +34,8 @@ public class CombatSimilator : MonoBehaviour
         {
             Debug.LogFormat("{0}'s turn", attacker.name);
 
-            GetComponentInChildren<Skill>().Use(defender);
+            Skill skill = attacker.GetComponentInChildren<Skill>();
+            skill.Use(skill.GetComponent<Targets>().GetTarget());
 
             lastAttacked = defender;
             defender = attacker;
