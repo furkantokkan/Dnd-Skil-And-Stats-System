@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealEffect : EffectCalculator
+public class HealEffect : Effect
 {
     private const float variance = 0.2f;
     public float power = 1;

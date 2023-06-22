@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public abstract class EffectCalculator : MonoBehaviour
+public abstract class Effect : MonoBehaviour
 {
-    public List<StatsEffect> attackStats = new List<StatsEffect>();
+    public List<StatsEffect> attackStats = new List<StatsEffect>() { new StatsEffect()
+    {
+        stat = StatEnum.None,
+        multipiler = 0
+    }
+    };
 
     public StatEnum defenderStat = StatEnum.None;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageEffect : EffectCalculator
+public class DamageEffect : Effect
 {
     private const float variance = 0.2f;
 

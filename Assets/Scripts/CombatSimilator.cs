@@ -50,14 +50,14 @@ public class CombatSimilator : MonoBehaviour
     [ContextMenu("AddModifier")]
     void AddModifier()
     {
-        AddValueModifier mod = attacker.gameObject.AddComponent<AddValueModifier>();
+        AddValueModifier mod = attacker.transform.Find("Status").gameObject.AddComponent<AddValueModifier>();
         mod.type = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(1);
     }
     [ContextMenu("MultiModifier")]
     void MultiModifier()
     {
-        MultiValueModifier mod = attacker.gameObject.AddComponent<MultiValueModifier>();
+        MultiValueModifier mod = attacker.transform.Find("Status").gameObject.AddComponent<MultiValueModifier>();
         mod.type = statToPrint;
         mod.typeToEffect = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(3);
