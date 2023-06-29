@@ -18,7 +18,7 @@ public class DamageEffect : Effect
 
         Debug.LogFormat("Attacker Score:{0}, DefenderScore{1}, roll:{3}, finalScore:{4}", attackerScore, defenderScore, score, roll, finalScore);
         int negativeScore = Mathf.CeilToInt(Mathf.Abs(finalScore) * (-1));
-        defender.ChangeHP(negativeScore);
+        defender.ChangeHP(Mathf.Min(0, negativeScore));
         Debug.LogFormat("{0} suffered {1} damage", defender.name, negativeScore);
     }
     protected override int CalculateScore(StatSystem unit, List<StatsEffect> stats)

@@ -14,6 +14,7 @@ public class InflictEffect : Effect
         if(!CanApply(statusHolder))
         {
             Debug.Log("Couldn't apply");
+            return;
         }
 
         Status status = Instantiate(statusToInflict, Vector2.zero, Quaternion.identity, statusHolder);
