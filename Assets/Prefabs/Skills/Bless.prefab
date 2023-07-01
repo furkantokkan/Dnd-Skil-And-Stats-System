@@ -90,5 +90,5 @@ MonoBehaviour:
   - stat: 10
     multipiler: 0
   defenderStat: 10
-  statusToInflict: {fileID: 1723690571284860819, guid: 377e3ebe32956f44d81fb504a6380191, type: 3}
+  statusToInflict: {fileID: 8743925469178746856, guid: 377e3ebe32956f44d81fb504a6380191, type: 3}
   stacks: 0

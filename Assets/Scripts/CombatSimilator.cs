@@ -25,7 +25,6 @@ public class CombatSimilator : MonoBehaviour
     {
         StartCoroutine(FightRoutine());
     }
-
     private IEnumerator FightRoutine()
     {
         StatSystem lastAttacked;
@@ -34,6 +33,7 @@ public class CombatSimilator : MonoBehaviour
         {
             Debug.LogFormat("{0}'s turn", attacker.name);
 
+            attacker.onTurnBegin?.Invoke();
             Skill skill = GetRandomSkill();
             skill.Use(skill.GetComponent<Targets>().GetTarget());
 
