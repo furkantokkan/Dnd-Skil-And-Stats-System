@@ -14,11 +14,13 @@ public class InflictEffect : Effect
         if(!CanApply(statusHolder))
         {
             Debug.Log("Couldn't apply");
+            ResetDuration(statusHolder);
             return;
         }
 
         Status status = Instantiate(statusToInflict, Vector2.zero, Quaternion.identity, statusHolder);
         status.name = status.name.Replace("(Clone)", "");
+        status.SetActors(attacker, defender);   
     }
 
     bool CanApply(Transform statusHolder)
@@ -37,5 +39,16 @@ public class InflictEffect : Effect
         }
 
         return true;
+    }
+    void ResetDuration(Transform statusHolder)
+    {
+        TemporaryStatus[] status = statusHolder.GetComponentsInChildren<TemporaryStatus>();
+        foreach (TemporaryStatus statusItem in status)
+        {
+            if (statusItem.name == statusToInflict.name)
+            {
+                statusItem.currentDuration = statusItem.initalDuration;
+            }
+        }
     }
 }

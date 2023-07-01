@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitChanceFixed: HitChanceCalculator
+public class HitChanceFixed : HitChanceCalculator
 {
     public float value = 70;
 

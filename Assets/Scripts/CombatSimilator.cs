@@ -35,7 +35,14 @@ public class CombatSimilator : MonoBehaviour
 
             attacker.onTurnBegin?.Invoke();
             Skill skill = GetRandomSkill();
-            skill.Use(skill.GetComponent<Targets>().GetTarget());
+            if (skill)
+            {
+                skill.Use(skill.GetComponent<Targets>().GetTarget());
+            }
+            else
+            {
+                Debug.Log("Miss The turn");
+            }
 
             lastAttacked = defender;
             defender = attacker;
@@ -65,6 +72,12 @@ public class CombatSimilator : MonoBehaviour
     Skill GetRandomSkill()
     {
         Skill[] skills = attacker.GetComponentsInChildren<Skill>();
+
+        if (skills.Length <= 0)
+        {
+            return null;
+        }
+
         int index = Random.Range(0, skills.Length);
         return skills[index];
     }
