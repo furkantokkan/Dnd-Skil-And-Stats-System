@@ -23,6 +23,9 @@ public class TurnOrderController : MonoBehaviour
     [Header("Units in Attack Queue")]
     public Queue<StatSystem> units = new Queue<StatSystem>();
 
+    [HideInInspector]
+    public List<StatSystem> allUnits = new List<StatSystem>();
+
     private void Awake()
     {
         InitializeUnits();
@@ -32,6 +35,8 @@ public class TurnOrderController : MonoBehaviour
     {
         playerUnits = new List<StatSystem>(playerTeam.GetComponentsInChildren<StatSystem>());
         enemyUnits = new List<StatSystem>(enemyTeam.GetComponentsInChildren<StatSystem>());
+        allUnits.AddRange(playerUnits);
+        allUnits.AddRange(enemyUnits);
 
         int maxUnits = Mathf.Max(playerUnits.Count, enemyUnits.Count);
 

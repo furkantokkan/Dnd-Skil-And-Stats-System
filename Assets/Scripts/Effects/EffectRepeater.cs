@@ -22,7 +22,10 @@ public class EffectRepeater : MonoBehaviour
     {
         foreach (Effect effect in GetComponents<Effect>())
         {
-            effect.ApplyEffect(status.caster, status.host);
+            if(status.host.GetAbilityScore(StatEnum.HP) > 0)
+            {
+                effect.ApplyEffect(status.caster, status.host);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ public class StatSystem : MonoBehaviour
     public OnTurnBegin onTurnBegin;
 
     public Stat[] stats = new Stat[Enum.GetValues(typeof(StatEnum)).Length - 1];
+
     [ContextMenu("SetStats")]
     void SetStats()
     {

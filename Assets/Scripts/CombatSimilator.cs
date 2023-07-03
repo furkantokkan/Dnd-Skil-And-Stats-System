@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CombatSimilator : MonoBehaviour
 {
-    private TurnOrderController turnOrderController;
+    [SerializeField] private Transform graveyard;
 
+    private TurnOrderController turnOrderController;
     [Header("Debug")]
     public StatSystem debugCharacter;
     public StatEnum statToPrint;
@@ -35,36 +36,43 @@ public class CombatSimilator : MonoBehaviour
             StatSystem attacker = GetAttacker();
             Debug.LogFormat("{0}'s turn", attacker.name);
 
-            attacker.onTurnBegin?.Invoke();
-            Skill skill = GetRandomSkill(attacker);
-            if (skill)
+            if (attacker != null)
             {
-                StatSystem target = skill.GetComponent<Targets>().GetTarget();
-
-                if (target != null)
+                attacker.onTurnBegin?.Invoke();
+                Skill skill = GetRandomSkill(attacker);
+                if (skill)
                 {
-                    skill.Use(target);
+                    StatSystem target = skill.GetComponent<Targets>().GetTarget();
 
-                    if (target.GetAbilityScore(StatEnum.HP) <= 0)
+                    if (target != null)
                     {
-                        Destroy(target.gameObject);
+                        skill.Use(target);
+
+                        if (target.GetAbilityScore(StatEnum.HP) <= 0)
+                        {
+                            target.transform.SetParent(graveyard);
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.Log("No valid target");
                     }
 
                 }
                 else
                 {
-                    Debug.Log("No valid target");
+                    Debug.Log("Miss The turn");
                 }
 
+                turnOrderController.units.Enqueue(attacker);
             }
             else
             {
-                Debug.Log("Miss The turn");
+                Debug.Log("Attacker is dead");
             }
 
-            turnOrderController.units.Enqueue(attacker);
-            yield return new WaitForSeconds(1f);
-
+            yield return null;
         } while (!CheckForGameOver());
 
         Debug.Log("Game Over!");
