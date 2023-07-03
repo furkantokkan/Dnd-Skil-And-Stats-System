@@ -37,7 +37,17 @@ public class CombatSimilator : MonoBehaviour
             Skill skill = GetRandomSkill();
             if (skill)
             {
-                skill.Use(skill.GetComponent<Targets>().GetTarget());
+                StatSystem target = skill.GetComponent<Targets>().GetTarget();
+
+                if (target != null)
+                {
+                    skill.Use(target);
+                }
+                else
+                {
+                    Debug.Log("No valid target");
+                }
+
             }
             else
             {

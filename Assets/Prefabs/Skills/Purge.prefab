@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 319091268151767545}
   - component: {fileID: 1847672765348910092}
   - component: {fileID: 8157296883041239024}
-  - component: {fileID: 6648263998546045614}
+  - component: {fileID: 2985002797007057041}
   - component: {fileID: 118789544160596761}
   m_Layer: 0
   m_Name: Purge
@@ -62,7 +62,7 @@ MonoBehaviour:
   attackerStat: 10
   defenderStat: 10
   value: 100
---- !u!114 &6648263998546045614
+--- !u!114 &2985002797007057041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,9 +71,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1741186137580412979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75aa37c487c088842ad4b4859ba3d778, type: 3}
+  m_Script: {fileID: 11500000, guid: 591579a31faa06a48be208f87c0b3922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusType: 0
 --- !u!114 &118789544160596761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +91,4 @@ MonoBehaviour:
   - stat: 10
     multipiler: 0
   defenderStat: 10
+  targetType: 0
