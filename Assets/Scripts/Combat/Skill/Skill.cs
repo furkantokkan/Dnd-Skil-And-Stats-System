@@ -15,7 +15,10 @@ public class Skill : MonoBehaviour
     {
         if (GetComponent<HitChanceCalculator>().Calculate(attacker, defender))
         {
-            GetComponent<Effect>().ApplyEffect(attacker, defender);
+            foreach (Effect effect in GetComponents<Effect>())
+            {
+                effect.ApplyEffect(attacker, defender);
+            }
         }
     }
 }
