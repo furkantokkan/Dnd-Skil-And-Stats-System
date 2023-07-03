@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class CombatSimilator : MonoBehaviour
 {
-    [Header("Actors")]
-
-    public StatSystem attacker;
-
-    public StatSystem defender;
+    private TurnOrderController turnOrderController;
 
     [Header("Debug")]
+    public StatSystem debugCharacter;
     public StatEnum statToPrint;
+
+    private void Awake()
+    {
+        turnOrderController = GetComponent<TurnOrderController>();
+    }
+
     [ContextMenu("Print Stat")]
     void PrintStat()
     {
         Debug.LogFormat("Value:{0}, Score:{1}",
-            attacker.GetStat(statToPrint).value,
-            attacker.GetAbilityScore(statToPrint));
+            debugCharacter.GetStat(statToPrint).value,
+            debugCharacter.GetAbilityScore(statToPrint));
 
     }
     [ContextMenu("Fight")]
@@ -27,14 +30,13 @@ public class CombatSimilator : MonoBehaviour
     }
     private IEnumerator FightRoutine()
     {
-        StatSystem lastAttacked;
-
         do
         {
+            StatSystem attacker = GetAttacker();
             Debug.LogFormat("{0}'s turn", attacker.name);
 
             attacker.onTurnBegin?.Invoke();
-            Skill skill = GetRandomSkill();
+            Skill skill = GetRandomSkill(attacker);
             if (skill)
             {
                 StatSystem target = skill.GetComponent<Targets>().GetTarget();
@@ -42,6 +44,12 @@ public class CombatSimilator : MonoBehaviour
                 if (target != null)
                 {
                     skill.Use(target);
+
+                    if (target.GetAbilityScore(StatEnum.HP) <= 0)
+                    {
+                        Destroy(target.gameObject);
+                    }
+
                 }
                 else
                 {
@@ -54,34 +62,80 @@ public class CombatSimilator : MonoBehaviour
                 Debug.Log("Miss The turn");
             }
 
-            lastAttacked = defender;
-            defender = attacker;
-            attacker = lastAttacked;
+            turnOrderController.units.Enqueue(attacker);
             yield return new WaitForSeconds(1f);
 
-        } while (lastAttacked.GetStat(StatEnum.HP).value > 0);
+        } while (!CheckForGameOver());
 
-        Debug.LogFormat("{0} is dead", lastAttacked.name);
+        Debug.Log("Game Over!");
+    }
+
+    private bool CheckForGameOver()
+    {
+        if (!IsTeamAlive(turnOrderController.playerUnits))
+        {
+            Debug.Log("Player Team is Dead");
+            return true;
+        }
+
+        if (!IsTeamAlive(turnOrderController.enemyUnits))
+        {
+            Debug.Log("Enemy Team is Dead");
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsTeamAlive(List<StatSystem> units)
+    {
+        for (int i = 0; i < units.Count; i++)
+        {
+            if (units[i].GetStat(StatEnum.HP).value > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private StatSystem GetAttacker()
+    {
+        while (turnOrderController.units.Count != 0)
+        {
+            StatSystem attacker = turnOrderController.units.Dequeue();
+
+            if (attacker != null)
+            {
+                if (attacker.GetStat(StatEnum.HP).value > 0)
+                {
+                    return attacker;
+                }
+            }
+        }
+
+        return null;
     }
 
     [ContextMenu("AddModifier")]
     void AddModifier()
     {
-        AddValueModifier mod = attacker.transform.Find("Status").gameObject.AddComponent<AddValueModifier>();
+        AddValueModifier mod = debugCharacter.transform.Find("Status").gameObject.AddComponent<AddValueModifier>();
         mod.type = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(1);
     }
     [ContextMenu("MultiModifier")]
     void MultiModifier()
     {
-        MultiValueModifier mod = attacker.transform.Find("Status").gameObject.AddComponent<MultiValueModifier>();
+        MultiValueModifier mod = debugCharacter.transform.Find("Status").gameObject.AddComponent<MultiValueModifier>();
         mod.type = statToPrint;
         mod.typeToEffect = statToPrint;
         mod.value = ScoreTable.AbilityValueModifierToAdd(3);
     }
-    Skill GetRandomSkill()
+    Skill GetRandomSkill(StatSystem currentAttacker)
     {
-        Skill[] skills = attacker.GetComponentsInChildren<Skill>();
+        Skill[] skills = currentAttacker.GetComponentsInChildren<Skill>();
 
         if (skills.Length <= 0)
         {
